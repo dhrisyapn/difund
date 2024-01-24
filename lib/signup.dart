@@ -1,3 +1,4 @@
+import 'package:difund/home.dart';
 import 'package:flutter/material.dart';
 
 class SignUp extends StatefulWidget {
@@ -126,6 +127,32 @@ class _SignUpState extends State<SignUp> {
                                  ),
             ),
           ),
+          Padding(
+             padding: const EdgeInsets.only(left: 15,right: 15,top: 15),
+             child: Container(
+                    width: double.infinity,
+                    height: 40,
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(5),
+                      color: Colors.white
+                    ),
+                    child: GestureDetector(
+                      onTap: () {
+                     Navigator.pushReplacement(context, MaterialPageRoute(builder: (context)=>HomePage()));
+                  },
+                      child: Center(
+                        child: Text(
+                          "Create account",
+                          style: TextStyle(
+                            fontSize: 20,
+                            fontWeight: FontWeight.w400,
+                            color: Colors.black
+                          ),),
+                      ),
+                    ),
+                    
+                   ),
+           ),
             ],
           ),
         ),
