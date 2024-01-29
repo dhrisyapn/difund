@@ -59,24 +59,35 @@ class _DonatePageState extends State<DonatePage> {
                                  ),
             ),
           ),
-          //need button
-          Padding(
-            padding: const EdgeInsets.only(left: 30,right: 30,top: 50),
-            child: SizedBox(
-              width: double.infinity,
-              height: 50,
-              child: ElevatedButton(
-                onPressed: (){},
-                child: Text("Continue",style: TextStyle(fontSize: 20,color: Colors.black),),
-                style: ElevatedButton.styleFrom(
-                  backgroundColor: Colors.white,
-                  shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(10)
-                  )
+          //gesture detector button with text "continue"
+          GestureDetector(
+            onTap: (){
+              //Navigator.push(context, MaterialPageRoute(builder: (context)=>DonatePage()));
+            },
+            child: Padding(
+              padding: const EdgeInsets.only(top: 30,left: 30,right: 30),
+              child: Container(
+                height: 50,
+                width: double.infinity,
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(5),
+                  color: Colors.white
+                ),
+                child: Center(
+                  child: Text(
+                    "Continue",
+                    style: TextStyle(
+                      fontSize: 20,
+                      fontWeight: FontWeight.w400,
+                      color: Colors.black
+                    ),
+                  ),
                 ),
               ),
-            ),  
+            ),
           ),
+
+         
             ],
           ),
         ),

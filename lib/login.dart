@@ -1,6 +1,7 @@
 import 'package:difund/forgot.dart';
 import 'package:difund/home.dart';
 import 'package:difund/signup.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
 class LoginPage extends StatefulWidget {
@@ -12,20 +13,28 @@ class LoginPage extends StatefulWidget {
 
 class _LoginPageState extends State<LoginPage> {
   bool visible=false;
-  var eyeicon=Icon(Icons.visibility_off);
+  var eyeicon=const Icon(Icons.visibility_off);
   void toggleicon(){
     
     setState(() {
       visible=!visible;
       if(!visible){
-        eyeicon=Icon(Icons.visibility);
+        eyeicon=const Icon(Icons.visibility);
     }
     else{
      
-        eyeicon=Icon(Icons.visibility_off);
+        eyeicon=const Icon(Icons.visibility_off);
     }
 
     });
+  }
+  
+  TextEditingController emailcontroller=TextEditingController();
+  TextEditingController passwordcontroller=TextEditingController();
+
+  bool isValid(String email) {
+    //check if email is valid
+    return RegExp(r"^[a-zA-Z0-9.]+@[a-zA-Z0-9]+\.[a-zA-Z]+").hasMatch(email);
   }
   @override
   Widget build(BuildContext context) {
@@ -34,7 +43,7 @@ class _LoginPageState extends State<LoginPage> {
       body: Container(
         height: double.infinity,
         width: double.infinity,
-    decoration: BoxDecoration(
+    decoration: const BoxDecoration(
       gradient: LinearGradient(
         colors: [Color(0xffE31298), Color(0xff1402C8)],
         begin: Alignment.topLeft,
@@ -53,13 +62,14 @@ class _LoginPageState extends State<LoginPage> {
             padding: const EdgeInsets.only(left: 15,right: 15,top: 50),
             child: SizedBox(height: 50,
               child: TextField(
+                controller: emailcontroller,
                 cursorColor: Colors.white,
-                decoration: InputDecoration(
-                hintText: 'Username',hintStyle: TextStyle(color: Colors.white,fontSize: 20,),
+                decoration: const InputDecoration(
+                hintText: 'Email',hintStyle: TextStyle(color: Colors.white,fontSize: 20,),
                                  enabledBorder: OutlineInputBorder(borderSide: BorderSide(color: Colors.white,width: 1)),
                                  focusedBorder:  OutlineInputBorder(borderSide: BorderSide(color: Colors.white,width: 1))
                                  ),
-                                 style: TextStyle(color: Colors.white,fontSize: 20),
+                                 style: const TextStyle(color: Colors.white,fontSize: 20),
                                  ),
             ),
           ),
@@ -67,14 +77,15 @@ class _LoginPageState extends State<LoginPage> {
             padding: const EdgeInsets.only(left: 15,right: 15,top: 10),
             child: SizedBox(height: 50,
               child: TextField(
+                controller: passwordcontroller,
                 cursorColor: Colors.white,
                 decoration: InputDecoration(
                   suffixIcon: IconButton(onPressed: toggleicon, icon: eyeicon,color: Colors.white,),
-                  hintText: 'Password',hintStyle: TextStyle(color: Colors.white,fontSize: 20,),
-                                 enabledBorder: OutlineInputBorder(borderSide: BorderSide(color: Colors.white,width: 1)),
-                                 focusedBorder:  OutlineInputBorder(borderSide: BorderSide(color: Colors.white,width: 1))
+                  hintText: 'Password',hintStyle: const TextStyle(color: Colors.white,fontSize: 20,),
+                                 enabledBorder: const OutlineInputBorder(borderSide: BorderSide(color: Colors.white,width: 1)),
+                                 focusedBorder:  const OutlineInputBorder(borderSide: BorderSide(color: Colors.white,width: 1))
                                  ),
-                                 style: TextStyle(color: Colors.white,fontSize: 20),
+                                 style: const TextStyle(color: Colors.white,fontSize: 20),
                                   obscureText: visible,
                                  ),
             ),
@@ -86,9 +97,9 @@ class _LoginPageState extends State<LoginPage> {
               children: [
                 GestureDetector(
                   onTap: () {
-                     Navigator.pushReplacement(context, MaterialPageRoute(builder: (context)=>ForgotPasswordPage()));
+                     Navigator.pushReplacement(context, MaterialPageRoute(builder: (context)=>const ForgotPasswordPage()));
                   },
-                  child: Text("Forgot Password",style: TextStyle(fontSize: 17,color: Colors.white),)),
+                  child: const Text("Forgot Password",style: TextStyle(fontSize: 17,color: Colors.white),)),
               ],
             ),
           ),
@@ -102,10 +113,57 @@ class _LoginPageState extends State<LoginPage> {
                       color: Colors.white
                     ),
                     child: GestureDetector(
-                      onTap: () {
-                     Navigator.pushReplacement(context, MaterialPageRoute(builder: (context)=>HomePage()));
+                      onTap: () async {
+                        
+                      //check if email is valid
+                    if (isValid(emailcontroller.text)) {
+                      //check if password is empty
+                      if (passwordcontroller.text.isNotEmpty) {
+                        //sign in user
+                        
+                       await FirebaseAuth.instance.signInWithEmailAndPassword(
+                          email: emailcontroller.text,
+                          password: passwordcontroller.text,
+                        ).then((user) {
+                          //if user is signed in successfully
+                          //go to home page
+                          Navigator.pushReplacement(context, MaterialPageRoute(builder: (context)=>const HomePage()));
+                        }).catchError((e) {
+                          //if error, show error message
+                          ScaffoldMessenger.of(context).showSnackBar(
+                            const SnackBar(
+                              content: Text(
+                                'Invalid email or password',
+                                textAlign: TextAlign.center,
+                              ),
+                            ),
+                          );
+                        });
+                      } else {
+                        //show error message
+                        ScaffoldMessenger.of(context).showSnackBar(
+                          const SnackBar(
+                            content: Text(
+                              'Password cannot be empty',
+                              textAlign: TextAlign.center,
+                            ),
+                          ),
+                        );
+                      }
+                    } else {
+                      //show error message
+                      ScaffoldMessenger.of(context).showSnackBar(
+                        const SnackBar(
+                          content: Text(
+                            'Please enter a valid email',
+                            textAlign: TextAlign.center,
+                          ),
+                        ),
+                      );
+                    }  
+
                   },
-                      child: Center(
+                      child: const Center(
                         child: Text(
                           "Login",
                           style: TextStyle(
@@ -118,8 +176,8 @@ class _LoginPageState extends State<LoginPage> {
                     
                    ),
            ),
-           Padding(
-             padding: const EdgeInsets.only(top: 20),
+           const Padding(
+             padding: EdgeInsets.only(top: 20),
              child: Text(
                     "Don't have an account?",
                     style: TextStyle(
@@ -130,9 +188,9 @@ class _LoginPageState extends State<LoginPage> {
            ),
            GestureDetector(
             onTap: () {
-                     Navigator.pushReplacement(context, MaterialPageRoute(builder: (context)=>SignUp()));
+                     Navigator.pushReplacement(context, MaterialPageRoute(builder: (context)=>const SignUp()));
                   },
-             child: Text(
+             child: const Text(
                       "Sign in here",
                       style: TextStyle(
                         fontSize: 20,
