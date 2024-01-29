@@ -1,4 +1,5 @@
 import 'package:difund/home.dart';
+import 'package:difund/login.dart';
 import 'package:flutter/material.dart';
 
 class SignUp extends StatefulWidget {
@@ -152,6 +153,29 @@ class _SignUpState extends State<SignUp> {
                     ),
                     
                    ),
+           ),
+           Padding(
+             padding: const EdgeInsets.only(top: 20),
+             child: Text(
+              "Already have an account?",
+              style: TextStyle(fontSize: 15,color: Colors.white),
+             ),
+           ),
+           GestureDetector(
+            onTap: () {
+              Navigator.pushReplacement(context, MaterialPageRoute(builder: (context)=>LoginPage()));
+            },
+             child: Text(
+                        "Sign in here",
+                        style: TextStyle(
+                          fontSize: 20,
+                          fontWeight: FontWeight.w500,
+                          color: Colors.white,
+                          decoration: TextDecoration.underline,
+                          decorationColor: Colors.white,
+                       
+                        ),
+                        ),
            ),
             ],
           ),

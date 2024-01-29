@@ -1,3 +1,5 @@
+import 'package:difund/donate.dart';
+import 'package:difund/forgot.dart';
 import 'package:difund/login.dart';
 import 'package:flutter/material.dart';
 
@@ -19,7 +21,7 @@ class MyApp extends StatelessWidget {
       
       ),
     debugShowCheckedModeBanner: false,
-    home: LoginPage(),
+    home: DonatePage(),
     );
   }
 }

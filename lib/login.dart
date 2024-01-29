@@ -1,3 +1,4 @@
+import 'package:difund/forgot.dart';
 import 'package:difund/home.dart';
 import 'package:difund/signup.dart';
 import 'package:flutter/material.dart';
@@ -83,7 +84,11 @@ class _LoginPageState extends State<LoginPage> {
             child: Row(
               mainAxisAlignment: MainAxisAlignment.end,
               children: [
-                Text("Forgot Password",style: TextStyle(fontSize: 17,color: Colors.white),),
+                GestureDetector(
+                  onTap: () {
+                     Navigator.pushReplacement(context, MaterialPageRoute(builder: (context)=>ForgotPasswordPage()));
+                  },
+                  child: Text("Forgot Password",style: TextStyle(fontSize: 17,color: Colors.white),)),
               ],
             ),
           ),
