@@ -1,5 +1,7 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:difund/home.dart';
 import 'package:difund/login.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
 class SignUp extends StatefulWidget {
@@ -10,6 +12,11 @@ class SignUp extends StatefulWidget {
 }
 
 class _SignUpState extends State<SignUp> {
+  TextEditingController fullname=TextEditingController();
+  TextEditingController emailController=TextEditingController();
+  TextEditingController passwordController=TextEditingController();
+  TextEditingController repasswordController=TextEditingController();
+  
   bool visible=false;
   var eyeicon=Icon(Icons.visibility_off);
   void toggleicon(){
@@ -72,6 +79,7 @@ class _SignUpState extends State<SignUp> {
             padding: const EdgeInsets.only(left: 15,right: 15,top: 20),
             child: SizedBox(height: 50,
               child: TextField(
+                controller: fullname,
                 cursorColor: Colors.white,
                 decoration: InputDecoration(
                 hintText: 'Full name',hintStyle: TextStyle(color: Colors.white,fontSize: 20,),
@@ -86,6 +94,7 @@ class _SignUpState extends State<SignUp> {
             padding: const EdgeInsets.only(left: 15,right: 15,top: 10),
             child: SizedBox(height: 50,
               child: TextField(
+                controller: emailController,
                 cursorColor: Colors.white,
                 decoration: InputDecoration(
                 hintText: 'Email',hintStyle: TextStyle(color: Colors.white,fontSize: 20,),
@@ -100,6 +109,7 @@ class _SignUpState extends State<SignUp> {
             padding: const EdgeInsets.only(left: 15,right: 15,top: 10),
             child: SizedBox(height: 50,
               child: TextField(
+                controller: passwordController,
                 cursorColor: Colors.white,
                 decoration: InputDecoration(
                   suffixIcon: IconButton(onPressed: toggleicon, icon: eyeicon,color: Colors.white,),
@@ -116,6 +126,7 @@ class _SignUpState extends State<SignUp> {
             padding: const EdgeInsets.only(left: 15,right: 15,top: 10),
             child: SizedBox(height: 50,
               child: TextField(
+                controller: repasswordController,
                 cursorColor: Colors.white,
                 decoration: InputDecoration(
                   suffixIcon: IconButton(onPressed: toggleicon1, icon: eyeicon1,color: Colors.white,),
@@ -138,8 +149,112 @@ class _SignUpState extends State<SignUp> {
                       color: Colors.white
                     ),
                     child: GestureDetector(
-                      onTap: () {
-                     Navigator.pushReplacement(context, MaterialPageRoute(builder: (context)=>HomePage()));
+                      onTap: () async {
+                    if (fullname.text.isEmpty ||
+                          emailController.text.isEmpty ||
+                          passwordController.text.isEmpty ||
+                          repasswordController.text.isEmpty) {
+                        //show snackbar
+                        ScaffoldMessenger.of(context).showSnackBar(
+                          const SnackBar(
+                            content: Text(
+                              'Please fill all fields',
+                              textAlign: TextAlign.center,
+                              style: TextStyle(
+                                color: Colors.white,
+                                fontSize: 16,
+                                fontFamily: 'Gotham',
+                                fontWeight: FontWeight.w300,
+                              ),
+                            ),
+                            backgroundColor: Color(0xFFFF6D00),
+                            duration: Duration(seconds: 2),
+                          ),
+                        );
+                      } else {
+                        //check email is valid using regex
+                        if (RegExp(
+                                r'^.+@[a-zA-Z]+\.{1}[a-zA-Z]+(\.{0,1}[a-zA-Z]+)$')
+                            .hasMatch(emailController.text)) {
+                          //check password and confirm password are same
+                          if (passwordController.text ==
+                              repasswordController.text) {
+                            //sign up user using firebase
+                           await FirebaseAuth.instance
+                                .createUserWithEmailAndPassword(
+                                    email: emailController.text,
+                                    password: passwordController.text)
+                                .then((value) async {
+                              //add fullname to collection 'userdata' to doc email address of user to firestore
+                              await FirebaseFirestore.instance
+                                  .collection('userdata')
+                                  .doc(emailController.text)
+                                  .set({
+                                'name': fullname.text,
+                              });
+
+                             //naviagte to homepage()
+                              Navigator.pushReplacement(context, MaterialPageRoute(builder: (context)=>const HomePage()));
+                             
+                            }).catchError((e) {
+                              //show snackbar
+                              ScaffoldMessenger.of(context).showSnackBar(
+                                const SnackBar(
+                                  content: Text(
+                                    'Something went wrong',
+                                    textAlign: TextAlign.center,
+                                    style: TextStyle(
+                                      color: Colors.white,
+                                      fontSize: 16,
+                                      fontFamily: 'Gotham',
+                                      fontWeight: FontWeight.w300,
+                                    ),
+                                  ),
+                                  backgroundColor: Color(0xFFFF6D00),
+                                  duration: Duration(seconds: 2),
+                                ),
+                              );
+                            });
+                          } else {
+                            //show snackbar
+                            ScaffoldMessenger.of(context).showSnackBar(
+                              const SnackBar(
+                                content: Text(
+                                  'Password and Confirm Password are not same',
+                                  textAlign: TextAlign.center,
+                                  style: TextStyle(
+                                    color: Colors.white,
+                                    fontSize: 16,
+                                    fontFamily: 'Gotham',
+                                    fontWeight: FontWeight.w300,
+                                  ),
+                                ),
+                                backgroundColor: Color(0xFFFF6D00),
+                                duration: Duration(seconds: 2),
+                              ),
+                            );
+                          }
+                        } else {
+                          //show snackbar
+                          ScaffoldMessenger.of(context).showSnackBar(
+                            const SnackBar(
+                              content: Text(
+                                'Please enter a valid email address',
+                                textAlign: TextAlign.center,
+                                style: TextStyle(
+                                  color: Colors.white,
+                                  fontSize: 16,
+                                  fontFamily: 'Gotham',
+                                  fontWeight: FontWeight.w300,
+                                ),
+                              ),
+                              backgroundColor: Color(0xFFFF6D00),
+                              duration: Duration(seconds: 2),
+                            ),
+                          );
+                        }
+                      }
+                    
                   },
                       child: Center(
                         child: Text(

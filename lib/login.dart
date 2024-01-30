@@ -97,7 +97,7 @@ class _LoginPageState extends State<LoginPage> {
               children: [
                 GestureDetector(
                   onTap: () {
-                     Navigator.pushReplacement(context, MaterialPageRoute(builder: (context)=>const ForgotPasswordPage()));
+                     Navigator.push(context, MaterialPageRoute(builder: (context)=>const ForgotPasswordPage()));
                   },
                   child: const Text("Forgot Password",style: TextStyle(fontSize: 17,color: Colors.white),)),
               ],
@@ -165,7 +165,7 @@ class _LoginPageState extends State<LoginPage> {
                   },
                       child: const Center(
                         child: Text(
-                          "Login",
+                          "Sign In",
                           style: TextStyle(
                             fontSize: 20,
                             fontWeight: FontWeight.w400,
@@ -191,7 +191,7 @@ class _LoginPageState extends State<LoginPage> {
                      Navigator.pushReplacement(context, MaterialPageRoute(builder: (context)=>const SignUp()));
                   },
              child: const Text(
-                      "Sign in here",
+                      "Sign Up here",
                       style: TextStyle(
                         fontSize: 20,
                         fontWeight: FontWeight.w500,
