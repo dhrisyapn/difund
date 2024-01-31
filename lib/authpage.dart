@@ -1,9 +1,9 @@
 import 'package:difund/login.dart';
+import 'package:difund/org.dart';
 import 'package:flutter/material.dart';
 //import firebaseauth
 
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:difund/home.dart';
 
 class AuthPage extends StatefulWidget {
   const AuthPage({super.key});
@@ -16,8 +16,6 @@ class _AuthPageState extends State<AuthPage> {
   @override
   Widget build(BuildContext context) {
     return //if user logined goto home else sign in
-        FirebaseAuth.instance.currentUser == null
-            ? LoginPage():HomePage();
-
+        FirebaseAuth.instance.currentUser == null ? LoginPage() : OrgPage();
   }
 }
