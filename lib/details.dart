@@ -1,4 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:difund/donate.dart';
 import 'package:flutter/material.dart';
 
 class DetailsPage extends StatefulWidget {
@@ -17,6 +18,10 @@ class _DetailsPageState extends State<DetailsPage> {
       appBar: AppBar(
         backgroundColor: Color(0xff5D57EB),
         elevation: 0,
+        leading: IconButton(
+          icon: Icon(Icons.arrow_back, color: Colors.white),
+          onPressed: () => Navigator.of(context).pop(),
+        ),
         title: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           crossAxisAlignment: CrossAxisAlignment.center,
@@ -39,87 +44,142 @@ class _DetailsPageState extends State<DetailsPage> {
             end: Alignment.bottomRight,
           ),
         ),
-        child: Column(
-          children: [
-            StreamBuilder<DocumentSnapshot>(
-                stream: FirebaseFirestore.instance
-                    .collection('organizations')
-                    .doc(widget.docid)
-                    .snapshots(),
-                builder: (BuildContext context,
-                    AsyncSnapshot<DocumentSnapshot> snapshot) {
-                  if (snapshot.hasError) {
-                    return const Text('Something went wrong');
-                  }
+        child: SingleChildScrollView(
+          child: Padding(
+            padding: const EdgeInsets.only(left: 30, right: 30),
+            child: Column(
+              children: [
+                StreamBuilder<DocumentSnapshot>(
+                    stream: FirebaseFirestore.instance
+                        .collection('organizations')
+                        .doc(widget.docid)
+                        .snapshots(),
+                    builder: (BuildContext context,
+                        AsyncSnapshot<DocumentSnapshot> snapshot) {
+                      if (snapshot.hasError) {
+                        return const Text('Something went wrong');
+                      }
 
-                  if (snapshot.connectionState == ConnectionState.waiting) {
-                    return const Text("Loading");
-                  }
+                      if (snapshot.connectionState == ConnectionState.waiting) {
+                        return const Text("Loading");
+                      }
 
-                  return Padding(
-                    padding: const EdgeInsets.only(top: 50),
-                    child: Text(
-                      snapshot.data!['name'],
-                      style: TextStyle(
-                          fontSize: 25,
-                          color: Colors.white,
-                          fontWeight: FontWeight.w500),
+                      return Padding(
+                          padding: const EdgeInsets.only(top: 50),
+                          child: Image.network(
+                            snapshot.data?['image'],
+                          ));
+                    }),
+                StreamBuilder<DocumentSnapshot>(
+                    stream: FirebaseFirestore.instance
+                        .collection('organizations')
+                        .doc(widget.docid)
+                        .snapshots(),
+                    builder: (BuildContext context,
+                        AsyncSnapshot<DocumentSnapshot> snapshot) {
+                      if (snapshot.hasError) {
+                        return const Text('Something went wrong');
+                      }
+
+                      if (snapshot.connectionState == ConnectionState.waiting) {
+                        return //Text("Loading");
+                            const CircularProgressIndicator();
+                      }
+
+                      return Padding(
+                        padding: const EdgeInsets.only(top: 50),
+                        child: Text(
+                          snapshot.data!['name'],
+                          style: TextStyle(
+                              fontSize: 25,
+                              color: Colors.white,
+                              fontWeight: FontWeight.w500),
+                        ),
+                      );
+                    }),
+                StreamBuilder<DocumentSnapshot>(
+                    stream: FirebaseFirestore.instance
+                        .collection('organizations')
+                        .doc(widget.docid)
+                        .snapshots(),
+                    builder: (BuildContext context,
+                        AsyncSnapshot<DocumentSnapshot> snapshot) {
+                      if (snapshot.hasError) {
+                        return const Text('Something went wrong');
+                      }
+
+                      if (snapshot.connectionState == ConnectionState.waiting) {
+                        return const CircularProgressIndicator();
+                      }
+
+                      return Padding(
+                        padding: const EdgeInsets.only(top: 10),
+                        child: Text(
+                          '₹  ' +
+                              snapshot.data!['total'].toString() +
+                              '  collected',
+                          style: TextStyle(
+                              fontSize: 25,
+                              color: Colors.white,
+                              fontWeight: FontWeight.w500),
+                        ),
+                      );
+                    }),
+                StreamBuilder<DocumentSnapshot>(
+                    stream: FirebaseFirestore.instance
+                        .collection('organizations')
+                        .doc(widget.docid)
+                        .snapshots(),
+                    builder: (BuildContext context,
+                        AsyncSnapshot<DocumentSnapshot> snapshot) {
+                      if (snapshot.hasError) {
+                        return const Text('Something went wrong');
+                      }
+
+                      if (snapshot.connectionState == ConnectionState.waiting) {
+                        return const CircularProgressIndicator();
+                      }
+
+                      return Padding(
+                        padding: const EdgeInsets.only(top: 10),
+                        child: Text(
+                          snapshot.data!['desc'].toString(),
+                          style: TextStyle(
+                              fontSize: 20,
+                              color: Colors.white,
+                              fontWeight: FontWeight.w500),
+                        ),
+                      );
+                    }),
+                GestureDetector(
+                  onTap: () {
+                    Navigator.push(context,
+                        MaterialPageRoute(builder: (context) => DonatePage()));
+                  },
+                  child: Padding(
+                    padding:
+                        const EdgeInsets.only(top: 30, left: 30, right: 30),
+                    child: Container(
+                      height: 50,
+                      width: double.infinity,
+                      decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(5),
+                          color: Colors.white),
+                      child: Center(
+                        child: Text(
+                          "Donate",
+                          style: TextStyle(
+                              fontSize: 20,
+                              fontWeight: FontWeight.w400,
+                              color: Colors.black),
+                        ),
+                      ),
                     ),
-                  );
-                }),
-            StreamBuilder<DocumentSnapshot>(
-                stream: FirebaseFirestore.instance
-                    .collection('organizations')
-                    .doc(widget.docid)
-                    .snapshots(),
-                builder: (BuildContext context,
-                    AsyncSnapshot<DocumentSnapshot> snapshot) {
-                  if (snapshot.hasError) {
-                    return const Text('Something went wrong');
-                  }
-
-                  if (snapshot.connectionState == ConnectionState.waiting) {
-                    return const Text("Loading");
-                  }
-
-                  return Padding(
-                    padding: const EdgeInsets.only(top: 10),
-                    child: Text(
-                      snapshot.data!['desc'].toString(),
-                      style: TextStyle(
-                          fontSize: 25,
-                          color: Colors.white,
-                          fontWeight: FontWeight.w500),
-                    ),
-                  );
-                }),
-            StreamBuilder<DocumentSnapshot>(
-                stream: FirebaseFirestore.instance
-                    .collection('organizations')
-                    .doc(widget.docid)
-                    .snapshots(),
-                builder: (BuildContext context,
-                    AsyncSnapshot<DocumentSnapshot> snapshot) {
-                  if (snapshot.hasError) {
-                    return const Text('Something went wrong');
-                  }
-
-                  if (snapshot.connectionState == ConnectionState.waiting) {
-                    return const Text("Loading");
-                  }
-
-                  return Padding(
-                    padding: const EdgeInsets.only(top: 10),
-                    child: Text(
-                      snapshot.data!['total'].toString(),
-                      style: TextStyle(
-                          fontSize: 25,
-                          color: Colors.white,
-                          fontWeight: FontWeight.w500),
-                    ),
-                  );
-                }),
-          ],
+                  ),
+                ),
+              ],
+            ),
+          ),
         ),
       ),
     );
