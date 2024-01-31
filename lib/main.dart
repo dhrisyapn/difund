@@ -12,7 +12,7 @@ Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp(
     options: DefaultFirebaseOptions.currentPlatform,
-);
+  );
   runApp(const MyApp());
 }
 
@@ -25,13 +25,10 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       title: 'DiFUND',
       theme: ThemeData(
-       
         useMaterial3: true,
-      
       ),
-    debugShowCheckedModeBanner: false,
-    home: OrgPage(),
+      debugShowCheckedModeBanner: false,
+      home: AuthPage(),
     );
   }
 }
-

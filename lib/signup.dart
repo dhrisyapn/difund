@@ -147,7 +147,7 @@ class _SignUpState extends State<SignUp> {
                             borderSide:
                                 BorderSide(color: Colors.white, width: 1))),
                     style: TextStyle(color: Colors.white, fontSize: 20),
-                    obscureText: visible,
+                    obscureText: !visible,
                   ),
                 ),
               ),
@@ -176,7 +176,7 @@ class _SignUpState extends State<SignUp> {
                             borderSide:
                                 BorderSide(color: Colors.white, width: 1))),
                     style: TextStyle(color: Colors.white, fontSize: 20),
-                    obscureText: visible1,
+                    obscureText: !visible1,
                   ),
                 ),
               ),
