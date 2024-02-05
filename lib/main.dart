@@ -5,6 +5,7 @@ import 'package:difund/forgot.dart';
 import 'package:difund/login.dart';
 import 'package:difund/org.dart';
 import 'package:difund/payment.dart';
+import 'package:difund/profile.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 
@@ -28,7 +29,7 @@ class MyApp extends StatelessWidget {
         useMaterial3: true,
       ),
       debugShowCheckedModeBanner: false,
-      home: AuthPage(),
+      home: ProfilePage(),
     );
   }
 }
