@@ -1,4 +1,5 @@
 import 'package:difund/details.dart';
+import 'package:difund/profile.dart';
 import 'package:flutter/material.dart';
 //cloud_firestore
 import 'package:cloud_firestore/cloud_firestore.dart';
@@ -128,6 +129,19 @@ class _OrgPageState extends State<OrgPage> {
                   ),
                 );
               },
+            ),
+            //button to go to profile page
+            Padding(
+              padding: const EdgeInsets.only(top: 20),
+              child: ElevatedButton(
+                onPressed: () {
+                  Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                          builder: (context) => const ProfilePage()));
+                },
+                child: const Text('Profile'),
+              ),
             ),
           ],
         ),
