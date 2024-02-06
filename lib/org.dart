@@ -34,6 +34,19 @@ class _OrgPageState extends State<OrgPage> {
             ),
           ],
         ),
+        //go to profile page
+        actions: [
+          IconButton(
+            onPressed: () {
+              Navigator.push(context,
+                  MaterialPageRoute(builder: (context) => const ProfilePage()));
+            },
+            icon: const Icon(
+              Icons.person,
+              color: Colors.white,
+            ),
+          ),
+        ],
         centerTitle: true,
       ),
       body: Container(
@@ -134,19 +147,6 @@ class _OrgPageState extends State<OrgPage> {
                   ),
                 );
               },
-            ),
-            //button to go to profile page
-            Padding(
-              padding: const EdgeInsets.only(top: 20),
-              child: ElevatedButton(
-                onPressed: () {
-                  Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                          builder: (context) => const ProfilePage()));
-                },
-                child: const Text('Profile'),
-              ),
             ),
           ],
         ),
