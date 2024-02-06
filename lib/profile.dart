@@ -11,7 +11,7 @@ class ProfilePage extends StatefulWidget {
 }
 
 class _ProfilePageState extends State<ProfilePage> {
-  final String email = FirebaseAuth.instance.currentUser!.email.toString();
+  final email = FirebaseAuth.instance.currentUser!.email;
 
   @override
   Widget build(BuildContext context) {
@@ -44,36 +44,71 @@ class _ProfilePageState extends State<ProfilePage> {
         ),
         child: Column(
           children: [
-            Text(
-              'My Profile',
-              style: TextStyle(fontSize: 30, color: Colors.white),
+            Padding(
+              padding: const EdgeInsets.only(top: 10),
+              child: Text(
+                'My Profile',
+                style: TextStyle(fontSize: 35, color: Colors.white),
+              ),
             ),
             SizedBox(
               height: 20,
             ),
             //get name and age  from collection userdata and document and email
-            StreamBuilder<DocumentSnapshot>(
-              stream: FirebaseFirestore.instance
-                  .collection('userdata')
-                  .doc(email)
-                  .snapshots(),
-              builder: (context, snapshot) {
-                if (snapshot.hasData) {
-                  return Text(
-                    'Hola ${snapshot.data!['name']}!',
-                    style: const TextStyle(
-                      color: Colors.white,
-                      fontSize: 19,
-                      fontFamily: 'Gotham',
-                      fontWeight: FontWeight.w300,
-                      height: 0.07,
-                    ),
-                  );
-                } else {
-                  return const CircularProgressIndicator();
-                }
-              },
+            Padding(
+              padding: const EdgeInsets.only(left: 30, top: 20),
+              child: Row(
+                children: [
+                  StreamBuilder<DocumentSnapshot>(
+                    stream: FirebaseFirestore.instance
+                        .collection('userdata')
+                        .doc(email)
+                        .snapshots(),
+                    builder: (context, snapshot) {
+                      if (snapshot.hasData) {
+                        return Text(
+                          ' ${snapshot.data!['name']}',
+                          style: const TextStyle(
+                            color: Colors.white,
+                            fontSize: 30,
+                            fontFamily: 'Gotham',
+                            fontWeight: FontWeight.w300,
+                            height: 0.07,
+                          ),
+                        );
+                      } else {
+                        return const CircularProgressIndicator();
+                      }
+                    },
+                  ),
+                ],
+              ),
             ),
+            Padding(
+              padding: const EdgeInsets.only(left: 30, top: 20),
+              child: Row(
+                children: [
+                  Text(email.toString(),
+                      style: const TextStyle(
+                        color: Colors.white,
+                        fontSize: 30,
+                        fontFamily: 'Gotham',
+                        fontWeight: FontWeight.w300,
+                      )),
+                ],
+              ),
+            ),
+            SizedBox(
+              height: 20,
+            ),
+
+            Text('Transactions',
+                style: const TextStyle(
+                  color: Colors.white,
+                  fontSize: 28,
+                  fontFamily: 'Gotham',
+                  fontWeight: FontWeight.w300,
+                )),
             //get name date amount from collection userdata document email sub collection transactions
             StreamBuilder<QuerySnapshot>(
               stream: FirebaseFirestore.instance
@@ -93,7 +128,7 @@ class _ProfilePageState extends State<ProfilePage> {
                 }
 
                 return Padding(
-                  padding: const EdgeInsets.only(left: 30, right: 30, top: 30),
+                  padding: const EdgeInsets.only(left: 30, right: 30, top: 0),
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.center,
                     children:

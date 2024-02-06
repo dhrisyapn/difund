@@ -3,6 +3,8 @@ import 'package:difund/profile.dart';
 import 'package:flutter/material.dart';
 //cloud_firestore
 import 'package:cloud_firestore/cloud_firestore.dart';
+//import auth
+import 'package:firebase_auth/firebase_auth.dart';
 
 class OrgPage extends StatefulWidget {
   const OrgPage({super.key});
@@ -12,6 +14,9 @@ class OrgPage extends StatefulWidget {
 }
 
 class _OrgPageState extends State<OrgPage> {
+  //current user email
+  final email = FirebaseAuth.instance.currentUser!.email;
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
