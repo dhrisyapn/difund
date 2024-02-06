@@ -1,7 +1,9 @@
+import 'package:difund/authpage.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 //import firebase_store
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:intl/intl.dart';
 
 class ProfilePage extends StatefulWidget {
   const ProfilePage({super.key});
@@ -31,6 +33,30 @@ class _ProfilePageState extends State<ProfilePage> {
           ],
         ),
         centerTitle: true,
+        //sign out button
+        actions: [
+          IconButton(
+            onPressed: () {
+              FirebaseAuth.instance.signOut();
+              Navigator.pushReplacement(context,
+                  MaterialPageRoute(builder: (context) => const AuthPage()));
+            },
+            icon: const Icon(
+              Icons.logout,
+              color: Colors.white,
+            ),
+          ),
+        ],
+        //white back button
+        leading: IconButton(
+          onPressed: () {
+            Navigator.pop(context);
+          },
+          icon: const Icon(
+            Icons.arrow_back,
+            color: Colors.white,
+          ),
+        ),
       ),
       body: Container(
         height: double.infinity,
@@ -150,37 +176,47 @@ class _ProfilePageState extends State<ProfilePage> {
                               mainAxisAlignment: MainAxisAlignment.center,
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
-                                Text(
-                                  data['name'],
-                                  style: const TextStyle(
-                                    color: Color(0xff5D57EB),
-                                    fontSize: 20,
-                                    fontFamily: 'Gotham',
-                                    fontWeight: FontWeight.w300,
-                                  ),
-                                ),
+                                Row(
+                                  mainAxisAlignment:
+                                      MainAxisAlignment.spaceBetween,
+                                  children: [
+                                    Column(
+                                      children: [
+                                        Text(
+                                          data['name'],
+                                          style: const TextStyle(
+                                            color:
+                                                Color.fromARGB(255, 15, 15, 15),
+                                            fontSize: 20,
+                                            fontFamily: 'Gotham',
+                                            fontWeight: FontWeight.w300,
+                                          ),
+                                        ),
 
-                                //take date in ddmmyyyy format from timestamp and convert to string
-                                Text(
-                                  data['date']
-                                      .toDate()
-                                      .toString()
-                                      .substring(0, 10),
-                                  style: const TextStyle(
-                                    color: Color(0xff5D57EB),
-                                    fontSize: 15,
-                                    fontFamily: 'Gotham',
-                                    fontWeight: FontWeight.w300,
-                                  ),
-                                ),
-                                Text(
-                                  data['amount'],
-                                  style: const TextStyle(
-                                    color: Color(0xff5D57EB),
-                                    fontSize: 15,
-                                    fontFamily: 'Gotham',
-                                    fontWeight: FontWeight.w300,
-                                  ),
+                                        //take date in ddmmyyyy format from timestamp and convert to string
+
+                                        Text(
+                                          DateFormat('dd-MM-yyyy')
+                                              .format(data['date'].toDate()),
+                                          style: const TextStyle(
+                                            color: Color.fromARGB(255, 0, 0, 0),
+                                            fontSize: 20,
+                                            fontFamily: 'Gotham',
+                                            fontWeight: FontWeight.w300,
+                                          ),
+                                        ),
+                                      ],
+                                    ),
+                                    Text(
+                                      data['amount'],
+                                      style: const TextStyle(
+                                        color: Color.fromARGB(255, 0, 0, 0),
+                                        fontSize: 20,
+                                        fontFamily: 'Gotham',
+                                        fontWeight: FontWeight.w300,
+                                      ),
+                                    ),
+                                  ],
                                 ),
                               ],
                             ),
@@ -191,6 +227,9 @@ class _ProfilePageState extends State<ProfilePage> {
                   ),
                 );
               },
+            ),
+            SizedBox(
+              height: 300,
             ),
           ],
         ),

@@ -6,6 +6,7 @@ import 'package:difund/login.dart';
 import 'package:difund/org.dart';
 import 'package:difund/payment.dart';
 import 'package:difund/profile.dart';
+import 'package:difund/signup.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 
