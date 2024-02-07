@@ -177,6 +177,9 @@ class _DetailsPageState extends State<DetailsPage> {
                     ),
                   ),
                 ),
+                SizedBox(
+                  height: 50,
+                )
               ],
             ),
           ),
