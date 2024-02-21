@@ -15,7 +15,7 @@ class _DonatePageState extends State<DonatePage> {
       body: Container(
         height: double.infinity,
         width: double.infinity,
-        decoration: BoxDecoration(
+        decoration: const BoxDecoration(
           gradient: LinearGradient(
             colors: [Color(0xffE31298), Color(0xff1402C8)],
             begin: Alignment.topLeft,
@@ -31,8 +31,8 @@ class _DonatePageState extends State<DonatePage> {
                 'assets/logo.png',
                 width: 216,
               ),
-              Padding(
-                padding: const EdgeInsets.only(top: 100),
+              const Padding(
+                padding: EdgeInsets.only(top: 100),
                 child: Text(
                   "Enter amount",
                   style: TextStyle(
@@ -41,8 +41,8 @@ class _DonatePageState extends State<DonatePage> {
                       color: Colors.white),
                 ),
               ),
-              Padding(
-                padding: const EdgeInsets.only(left: 30, right: 30, top: 10),
+              const Padding(
+                padding: EdgeInsets.only(left: 30, right: 30, top: 10),
                 child: SizedBox(
                   height: 50,
                   child: TextField(
@@ -71,8 +71,10 @@ class _DonatePageState extends State<DonatePage> {
               //gesture detector button with text "continue"
               GestureDetector(
                 onTap: () {
-                  Navigator.push(context,
-                      MaterialPageRoute(builder: (context) => PaymentPage()));
+                  Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                          builder: (context) => const PaymentPage()));
                 },
                 child: Padding(
                   padding: const EdgeInsets.only(top: 30, left: 30, right: 30),
@@ -82,7 +84,7 @@ class _DonatePageState extends State<DonatePage> {
                     decoration: BoxDecoration(
                         borderRadius: BorderRadius.circular(5),
                         color: Colors.white),
-                    child: Center(
+                    child: const Center(
                       child: Text(
                         "Continue",
                         style: TextStyle(

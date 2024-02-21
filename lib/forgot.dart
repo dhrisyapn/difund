@@ -2,8 +2,6 @@ import 'package:flutter/material.dart';
 //import all firebase for reset link
 import 'package:firebase_auth/firebase_auth.dart';
 
-import 'package:firebase_core/firebase_core.dart';
-
 class ForgotPasswordPage extends StatefulWidget {
   const ForgotPasswordPage({super.key});
 
@@ -19,7 +17,7 @@ class _ForgotPasswordPageState extends State<ForgotPasswordPage> {
       body: Container(
         height: double.infinity,
         width: double.infinity,
-        decoration: BoxDecoration(
+        decoration: const BoxDecoration(
           gradient: LinearGradient(
             colors: [Color(0xffE31298), Color(0xff1402C8)],
             begin: Alignment.topLeft,
@@ -36,8 +34,8 @@ class _ForgotPasswordPageState extends State<ForgotPasswordPage> {
                   'assets/logo.png',
                   width: 216,
                 ),
-                Padding(
-                  padding: const EdgeInsets.only(top: 300),
+                const Padding(
+                  padding: EdgeInsets.only(top: 300),
                   child: Text(
                     "Forgot Password?",
                     style: TextStyle(
@@ -46,8 +44,8 @@ class _ForgotPasswordPageState extends State<ForgotPasswordPage> {
                         fontWeight: FontWeight.w500),
                   ),
                 ),
-                Padding(
-                  padding: const EdgeInsets.only(top: 5),
+                const Padding(
+                  padding: EdgeInsets.only(top: 5),
                   child: Text(
                     "We will send you a link to reset password.",
                     style: TextStyle(
@@ -63,7 +61,7 @@ class _ForgotPasswordPageState extends State<ForgotPasswordPage> {
                     child: TextField(
                       controller: emailController,
                       cursorColor: Colors.white,
-                      decoration: InputDecoration(
+                      decoration: const InputDecoration(
                           hintText: 'Email address',
                           hintStyle: TextStyle(
                             color: Colors.white,
@@ -75,7 +73,7 @@ class _ForgotPasswordPageState extends State<ForgotPasswordPage> {
                           focusedBorder: OutlineInputBorder(
                               borderSide:
                                   BorderSide(color: Colors.white, width: 1))),
-                      style: TextStyle(color: Colors.white, fontSize: 20),
+                      style: const TextStyle(color: Colors.white, fontSize: 20),
                     ),
                   ),
                 ),
@@ -85,7 +83,7 @@ class _ForgotPasswordPageState extends State<ForgotPasswordPage> {
                     FirebaseAuth.instance
                         .sendPasswordResetEmail(email: emailController.text);
                     //show snackbar
-                    ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+                    ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
                       content: Text("Reset link sent to your email"),
                     ));
                     //pop
@@ -100,7 +98,7 @@ class _ForgotPasswordPageState extends State<ForgotPasswordPage> {
                       decoration: BoxDecoration(
                           borderRadius: BorderRadius.circular(5),
                           color: Colors.white),
-                      child: Center(
+                      child: const Center(
                         child: Text(
                           "Send Link",
                           style: TextStyle(

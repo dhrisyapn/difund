@@ -1,3 +1,5 @@
+// ignore_for_file: use_build_context_synchronously
+
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:difund/login.dart';
 import 'package:difund/org.dart';
@@ -18,27 +20,27 @@ class _SignUpState extends State<SignUp> {
   TextEditingController repasswordController = TextEditingController();
 
   bool visible = false;
-  var eyeicon = Icon(Icons.visibility_off);
+  var eyeicon = const Icon(Icons.visibility_off);
   void toggleicon() {
     setState(() {
       visible = !visible;
       if (!visible) {
-        eyeicon = Icon(Icons.visibility);
+        eyeicon = const Icon(Icons.visibility);
       } else {
-        eyeicon = Icon(Icons.visibility_off);
+        eyeicon = const Icon(Icons.visibility_off);
       }
     });
   }
 
   bool visible1 = false;
-  var eyeicon1 = Icon(Icons.visibility_off);
+  var eyeicon1 = const Icon(Icons.visibility_off);
   void toggleicon1() {
     setState(() {
       visible1 = !visible1;
       if (!visible1) {
-        eyeicon1 = Icon(Icons.visibility);
+        eyeicon1 = const Icon(Icons.visibility);
       } else {
-        eyeicon1 = Icon(Icons.visibility_off);
+        eyeicon1 = const Icon(Icons.visibility_off);
       }
     });
   }
@@ -50,7 +52,7 @@ class _SignUpState extends State<SignUp> {
       body: Container(
         height: double.infinity,
         width: double.infinity,
-        decoration: BoxDecoration(
+        decoration: const BoxDecoration(
           gradient: LinearGradient(
             colors: [Color(0xff2EAAFA), Color(0xff8C04DB)],
             begin: Alignment.topLeft,
@@ -66,8 +68,8 @@ class _SignUpState extends State<SignUp> {
                 'assets/logo.png',
                 width: 216,
               ),
-              Padding(
-                padding: const EdgeInsets.only(right: 30, top: 30),
+              const Padding(
+                padding: EdgeInsets.only(right: 30, top: 30),
                 child: Text(
                   "Create account",
                   style: TextStyle(
@@ -83,7 +85,7 @@ class _SignUpState extends State<SignUp> {
                   child: TextField(
                     controller: fullname,
                     cursorColor: Colors.white,
-                    decoration: InputDecoration(
+                    decoration: const InputDecoration(
                         hintText: 'Full name',
                         hintStyle: TextStyle(
                           color: Colors.white,
@@ -95,7 +97,7 @@ class _SignUpState extends State<SignUp> {
                         focusedBorder: OutlineInputBorder(
                             borderSide:
                                 BorderSide(color: Colors.white, width: 1))),
-                    style: TextStyle(color: Colors.white, fontSize: 20),
+                    style: const TextStyle(color: Colors.white, fontSize: 20),
                   ),
                 ),
               ),
@@ -106,7 +108,7 @@ class _SignUpState extends State<SignUp> {
                   child: TextField(
                     controller: emailController,
                     cursorColor: Colors.white,
-                    decoration: InputDecoration(
+                    decoration: const InputDecoration(
                         hintText: 'Email',
                         hintStyle: TextStyle(
                           color: Colors.white,
@@ -118,7 +120,7 @@ class _SignUpState extends State<SignUp> {
                         focusedBorder: OutlineInputBorder(
                             borderSide:
                                 BorderSide(color: Colors.white, width: 1))),
-                    style: TextStyle(color: Colors.white, fontSize: 20),
+                    style: const TextStyle(color: Colors.white, fontSize: 20),
                   ),
                 ),
               ),
@@ -136,17 +138,17 @@ class _SignUpState extends State<SignUp> {
                           color: Colors.white,
                         ),
                         hintText: 'Password',
-                        hintStyle: TextStyle(
+                        hintStyle: const TextStyle(
                           color: Colors.white,
                           fontSize: 20,
                         ),
-                        enabledBorder: OutlineInputBorder(
+                        enabledBorder: const OutlineInputBorder(
                             borderSide:
                                 BorderSide(color: Colors.white, width: 1)),
-                        focusedBorder: OutlineInputBorder(
+                        focusedBorder: const OutlineInputBorder(
                             borderSide:
                                 BorderSide(color: Colors.white, width: 1))),
-                    style: TextStyle(color: Colors.white, fontSize: 20),
+                    style: const TextStyle(color: Colors.white, fontSize: 20),
                     obscureText: !visible,
                   ),
                 ),
@@ -165,17 +167,17 @@ class _SignUpState extends State<SignUp> {
                           color: Colors.white,
                         ),
                         hintText: 'Password',
-                        hintStyle: TextStyle(
+                        hintStyle: const TextStyle(
                           color: Colors.white,
                           fontSize: 20,
                         ),
-                        enabledBorder: OutlineInputBorder(
+                        enabledBorder: const OutlineInputBorder(
                             borderSide:
                                 BorderSide(color: Colors.white, width: 1)),
-                        focusedBorder: OutlineInputBorder(
+                        focusedBorder: const OutlineInputBorder(
                             borderSide:
                                 BorderSide(color: Colors.white, width: 1))),
-                    style: TextStyle(color: Colors.white, fontSize: 20),
+                    style: const TextStyle(color: Colors.white, fontSize: 20),
                     obscureText: !visible1,
                   ),
                 ),
@@ -297,7 +299,7 @@ class _SignUpState extends State<SignUp> {
                         }
                       }
                     },
-                    child: Center(
+                    child: const Center(
                       child: Text(
                         "Create account",
                         style: TextStyle(
@@ -309,8 +311,8 @@ class _SignUpState extends State<SignUp> {
                   ),
                 ),
               ),
-              Padding(
-                padding: const EdgeInsets.only(top: 20),
+              const Padding(
+                padding: EdgeInsets.only(top: 20),
                 child: Text(
                   "Already have an account?",
                   style: TextStyle(fontSize: 15, color: Colors.white),
@@ -318,10 +320,12 @@ class _SignUpState extends State<SignUp> {
               ),
               GestureDetector(
                 onTap: () {
-                  Navigator.pushReplacement(context,
-                      MaterialPageRoute(builder: (context) => LoginPage()));
+                  Navigator.pushReplacement(
+                      context,
+                      MaterialPageRoute(
+                          builder: (context) => const LoginPage()));
                 },
-                child: Text(
+                child: const Text(
                   "Sign in here",
                   style: TextStyle(
                     fontSize: 20,

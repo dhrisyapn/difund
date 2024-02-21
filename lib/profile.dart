@@ -20,7 +20,7 @@ class _ProfilePageState extends State<ProfilePage> {
     return Scaffold(
       backgroundColor: Colors.transparent,
       appBar: AppBar(
-        backgroundColor: Color(0xff5D57EB),
+        backgroundColor: const Color(0xff5D57EB),
         elevation: 0,
         title: Column(
           mainAxisAlignment: MainAxisAlignment.center,
@@ -61,7 +61,7 @@ class _ProfilePageState extends State<ProfilePage> {
       body: Container(
         height: double.infinity,
         width: double.infinity,
-        decoration: BoxDecoration(
+        decoration: const BoxDecoration(
           gradient: LinearGradient(
             colors: [Color(0xff2EAAFA), Color(0xff8C04DB)],
             begin: Alignment.topLeft,
@@ -70,14 +70,14 @@ class _ProfilePageState extends State<ProfilePage> {
         ),
         child: Column(
           children: [
-            Padding(
-              padding: const EdgeInsets.only(top: 10),
+            const Padding(
+              padding: EdgeInsets.only(top: 10),
               child: Text(
                 'My Profile',
                 style: TextStyle(fontSize: 35, color: Colors.white),
               ),
             ),
-            SizedBox(
+            const SizedBox(
               height: 20,
             ),
             //get name and age  from collection userdata and document and email
@@ -124,12 +124,12 @@ class _ProfilePageState extends State<ProfilePage> {
                 ],
               ),
             ),
-            SizedBox(
+            const SizedBox(
               height: 20,
             ),
 
-            Text('Transactions',
-                style: const TextStyle(
+            const Text('Transactions',
+                style: TextStyle(
                   color: Colors.white,
                   fontSize: 28,
                   fontFamily: 'Gotham',
@@ -228,7 +228,7 @@ class _ProfilePageState extends State<ProfilePage> {
                 );
               },
             ),
-            SizedBox(
+            const SizedBox(
               height: 300,
             ),
           ],

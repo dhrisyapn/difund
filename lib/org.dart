@@ -22,7 +22,7 @@ class _OrgPageState extends State<OrgPage> {
     return Scaffold(
       backgroundColor: Colors.transparent,
       appBar: AppBar(
-        backgroundColor: Color(0xff5D57EB),
+        backgroundColor: const Color(0xff5D57EB),
         elevation: 0,
         title: Column(
           mainAxisAlignment: MainAxisAlignment.center,
@@ -92,7 +92,7 @@ class _OrgPageState extends State<OrgPage> {
                           height: 100,
                           decoration: BoxDecoration(
                               borderRadius: BorderRadius.circular(8),
-                              color: Color(0xff121438)),
+                              color: const Color(0xff121438)),
                           child: GestureDetector(
                             onTap: () {
                               //navigate to details page with current doc id using Navigator.push
@@ -121,15 +121,13 @@ class _OrgPageState extends State<OrgPage> {
                                             CrossAxisAlignment.start,
                                         children: [
                                           Text(data['name'],
-                                              style: TextStyle(
+                                              style: const TextStyle(
                                                   fontSize: 18,
                                                   fontWeight: FontWeight.w700,
                                                   color: Colors.white)),
                                           Text(
-                                            '₹  ' +
-                                                data['total'].toString() +
-                                                '  collected',
-                                            style: TextStyle(
+                                            '₹  ${data['total']}  collected',
+                                            style: const TextStyle(
                                                 color: Colors.white,
                                                 fontSize: 14.0),
                                           ),

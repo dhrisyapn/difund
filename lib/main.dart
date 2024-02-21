@@ -1,12 +1,4 @@
-import 'package:difund/authpage.dart';
-import 'package:difund/donate.dart';
 import 'package:difund/firebase_options.dart';
-import 'package:difund/forgot.dart';
-import 'package:difund/login.dart';
-import 'package:difund/org.dart';
-import 'package:difund/payment.dart';
-import 'package:difund/profile.dart';
-import 'package:difund/signup.dart';
 import 'package:difund/splash.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
@@ -31,7 +23,7 @@ class MyApp extends StatelessWidget {
         useMaterial3: true,
       ),
       debugShowCheckedModeBanner: false,
-      home: splash(),
+      home: const splash(),
     );
   }
 }

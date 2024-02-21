@@ -16,6 +16,8 @@ class _AuthPageState extends State<AuthPage> {
   @override
   Widget build(BuildContext context) {
     return //if user logined goto home else sign in
-        FirebaseAuth.instance.currentUser == null ? LoginPage() : OrgPage();
+        FirebaseAuth.instance.currentUser == null
+            ? const LoginPage()
+            : const OrgPage();
   }
 }

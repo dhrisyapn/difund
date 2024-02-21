@@ -1,3 +1,4 @@
+import 'package:difund/paymentsuccess.dart';
 import 'package:flutter/material.dart';
 
 class PaymentPage extends StatefulWidget {
@@ -15,7 +16,7 @@ class _PaymentPageState extends State<PaymentPage> {
         body: Container(
           height: double.infinity,
           width: double.infinity,
-          decoration: BoxDecoration(
+          decoration: const BoxDecoration(
             gradient: LinearGradient(
               colors: [Color(0xff2EAAFA), Color(0xff8C04DB)],
               begin: Alignment.topLeft,
@@ -25,36 +26,41 @@ class _PaymentPageState extends State<PaymentPage> {
           child: SafeArea(
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
-          
               children: [
                 Image.asset(
                   'assets/logo.png',
                   width: 216,
                 ),
-                SizedBox(
+                const SizedBox(
                   height: 50,
                 ),
-                Padding(
-                  padding: const EdgeInsets.only(left: 40),
+                const Padding(
+                  padding: EdgeInsets.only(left: 40),
                   child: Row(
-                    
                     children: [
-                      Text(
-                        "UPI",
-                        textAlign: TextAlign.start,
+                      Text("UPI",
+                          textAlign: TextAlign.start,
                           style: TextStyle(
                             fontSize: 30,
                             fontWeight: FontWeight.w500,
                             color: Colors.white,
-                            
                           )),
                     ],
                   ),
                 ),
-                SizedBox(
+                const SizedBox(
                   height: 10,
                 ),
-                Container(
+                GestureDetector(
+                  onTap: () {
+                    //go to payment success page without route
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                          builder: (context) => const PaymentSuccess()),
+                    );
+                  },
+                  child: Container(
                     width: 335,
                     height: 58,
                     decoration: BoxDecoration(
@@ -63,80 +69,102 @@ class _PaymentPageState extends State<PaymentPage> {
                           width: 2, // Specify the border width here
                         ),
                         borderRadius: BorderRadius.circular(10),
-                        color: Color(0xff121438)),
-                        child: Row(
-                          children: [
-                            SizedBox(width: 10,),
-                            Image.asset("assets/gpay.png",
-                            height: 45,
-                            ),
-                            SizedBox(width: 10,),
-                            Text("Gpay",
-                            style: TextStyle(
-                              fontSize: 20,
-                              fontWeight: FontWeight.w500,
-                              color: Colors.white,
-                            ),),
-                          ],
+                        color: const Color(0xff121438)),
+                    child: Row(
+                      children: [
+                        const SizedBox(
+                          width: 10,
                         ),
+                        Image.asset(
+                          "assets/gpay.png",
+                          height: 45,
                         ),
-                Padding(
-                  padding: const EdgeInsets.only(top: 10),
-                  child: Container(
-                      width: 335,
-                      height: 58,
-                      decoration: BoxDecoration(
-                          border: Border.all(
-                            color: Colors.white, // Specify the border color here
-                            width: 2, // Specify the border width here
+                        const SizedBox(
+                          width: 10,
+                        ),
+                        const Text(
+                          "Gpay",
+                          style: TextStyle(
+                            fontSize: 20,
+                            fontWeight: FontWeight.w500,
+                            color: Colors.white,
                           ),
-                          borderRadius: BorderRadius.circular(10),
-                          color: Color(0xff121438)),
-                          child: Row(
-                            children: [
-                              SizedBox(width: 10,),
-                              Image.asset("assets/paytm.png",
-                              height: 44,
-                              ),
-                              SizedBox(width: 10,),
-                              Text("Paytm",
-                              style: TextStyle(
-                                fontSize: 20,
-                                fontWeight: FontWeight.w500,
-                                color: Colors.white,
-                              ),),
-                            ],
-                          ),
-                          ),
+                        ),
+                      ],
+                    ),
+                  ),
                 ),
                 Padding(
                   padding: const EdgeInsets.only(top: 10),
                   child: Container(
-                      width: 335,
-                      height: 58,
-                      decoration: BoxDecoration(
-                          border: Border.all(
-                            color: Colors.white, // Specify the border color here
-                            width: 2, // Specify the border width here
+                    width: 335,
+                    height: 58,
+                    decoration: BoxDecoration(
+                        border: Border.all(
+                          color: Colors.white, // Specify the border color here
+                          width: 2, // Specify the border width here
+                        ),
+                        borderRadius: BorderRadius.circular(10),
+                        color: const Color(0xff121438)),
+                    child: Row(
+                      children: [
+                        const SizedBox(
+                          width: 10,
+                        ),
+                        Image.asset(
+                          "assets/paytm.png",
+                          height: 44,
+                        ),
+                        const SizedBox(
+                          width: 10,
+                        ),
+                        const Text(
+                          "Paytm",
+                          style: TextStyle(
+                            fontSize: 20,
+                            fontWeight: FontWeight.w500,
+                            color: Colors.white,
                           ),
-                          borderRadius: BorderRadius.circular(10),
-                          color: Color(0xff121438)),
-                          child: Row(
-                            children: [
-                              SizedBox(width: 10,),
-                              Image.asset("assets/phonepe.png",
-                              height: 45,
-                              ),
-                              SizedBox(width: 10,),
-                              Text("PhonePe",
-                              style: TextStyle(
-                                fontSize: 20,
-                                fontWeight: FontWeight.w500,
-                                color: Colors.white,
-                              ),),
-                            ],
+                        ),
+                      ],
+                    ),
+                  ),
+                ),
+                Padding(
+                  padding: const EdgeInsets.only(top: 10),
+                  child: Container(
+                    width: 335,
+                    height: 58,
+                    decoration: BoxDecoration(
+                        border: Border.all(
+                          color: Colors.white, // Specify the border color here
+                          width: 2, // Specify the border width here
+                        ),
+                        borderRadius: BorderRadius.circular(10),
+                        color: const Color(0xff121438)),
+                    child: Row(
+                      children: [
+                        const SizedBox(
+                          width: 10,
+                        ),
+                        Image.asset(
+                          "assets/phonepe.png",
+                          height: 45,
+                        ),
+                        const SizedBox(
+                          width: 10,
+                        ),
+                        const Text(
+                          "PhonePe",
+                          style: TextStyle(
+                            fontSize: 20,
+                            fontWeight: FontWeight.w500,
+                            color: Colors.white,
                           ),
-                          ),
+                        ),
+                      ],
+                    ),
+                  ),
                 ),
               ],
             ),

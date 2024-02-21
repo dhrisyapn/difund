@@ -1,3 +1,5 @@
+// ignore_for_file: must_be_immutable
+
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:difund/donate.dart';
 import 'package:flutter/material.dart';
@@ -16,10 +18,10 @@ class _DetailsPageState extends State<DetailsPage> {
     return Scaffold(
       backgroundColor: Colors.transparent,
       appBar: AppBar(
-        backgroundColor: Color(0xff5D57EB),
+        backgroundColor: const Color(0xff5D57EB),
         elevation: 0,
         leading: IconButton(
-          icon: Icon(Icons.arrow_back, color: Colors.white),
+          icon: const Icon(Icons.arrow_back, color: Colors.white),
           onPressed: () => Navigator.of(context).pop(),
         ),
         title: Column(
@@ -90,7 +92,7 @@ class _DetailsPageState extends State<DetailsPage> {
                         padding: const EdgeInsets.only(top: 50),
                         child: Text(
                           snapshot.data!['name'],
-                          style: TextStyle(
+                          style: const TextStyle(
                               fontSize: 25,
                               color: Colors.white,
                               fontWeight: FontWeight.w500),
@@ -115,10 +117,8 @@ class _DetailsPageState extends State<DetailsPage> {
                       return Padding(
                         padding: const EdgeInsets.only(top: 10),
                         child: Text(
-                          '₹  ' +
-                              snapshot.data!['total'].toString() +
-                              '  collected',
-                          style: TextStyle(
+                          '₹  ${snapshot.data!['total']}  collected',
+                          style: const TextStyle(
                               fontSize: 25,
                               color: Colors.white,
                               fontWeight: FontWeight.w500),
@@ -144,7 +144,7 @@ class _DetailsPageState extends State<DetailsPage> {
                         padding: const EdgeInsets.only(top: 10),
                         child: Text(
                           snapshot.data!['desc'].toString(),
-                          style: TextStyle(
+                          style: const TextStyle(
                               fontSize: 20,
                               color: Colors.white,
                               fontWeight: FontWeight.w500),
@@ -153,8 +153,10 @@ class _DetailsPageState extends State<DetailsPage> {
                     }),
                 GestureDetector(
                   onTap: () {
-                    Navigator.push(context,
-                        MaterialPageRoute(builder: (context) => DonatePage()));
+                    Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) => const DonatePage()));
                   },
                   child: Padding(
                     padding:
@@ -165,7 +167,7 @@ class _DetailsPageState extends State<DetailsPage> {
                       decoration: BoxDecoration(
                           borderRadius: BorderRadius.circular(5),
                           color: Colors.white),
-                      child: Center(
+                      child: const Center(
                         child: Text(
                           "Donate",
                           style: TextStyle(
@@ -177,7 +179,7 @@ class _DetailsPageState extends State<DetailsPage> {
                     ),
                   ),
                 ),
-                SizedBox(
+                const SizedBox(
                   height: 50,
                 )
               ],
