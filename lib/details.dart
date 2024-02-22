@@ -51,6 +51,7 @@ class _DetailsPageState extends State<DetailsPage> {
             padding: const EdgeInsets.only(left: 30, right: 30),
             child: Column(
               children: [
+                //get organization details from firestore
                 StreamBuilder<DocumentSnapshot>(
                     stream: FirebaseFirestore.instance
                         .collection('organizations')
