@@ -96,73 +96,95 @@ class _PaymentPageState extends State<PaymentPage> {
                 ),
                 Padding(
                   padding: const EdgeInsets.only(top: 10),
-                  child: Container(
-                    width: 335,
-                    height: 58,
-                    decoration: BoxDecoration(
-                        border: Border.all(
-                          color: Colors.white, // Specify the border color here
-                          width: 2, // Specify the border width here
-                        ),
-                        borderRadius: BorderRadius.circular(10),
-                        color: const Color(0xff121438)),
-                    child: Row(
-                      children: [
-                        const SizedBox(
-                          width: 10,
-                        ),
-                        Image.asset(
-                          "assets/paytm.png",
-                          height: 44,
-                        ),
-                        const SizedBox(
-                          width: 10,
-                        ),
-                        const Text(
-                          "Paytm",
-                          style: TextStyle(
-                            fontSize: 20,
-                            fontWeight: FontWeight.w500,
-                            color: Colors.white,
+                  child: GestureDetector(
+                    onTap: () {
+                      //go to payment success page without route
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) => const PaymentSuccess()),
+                      );
+                    },
+                    child: Container(
+                      width: 335,
+                      height: 58,
+                      decoration: BoxDecoration(
+                          border: Border.all(
+                            color:
+                                Colors.white, // Specify the border color here
+                            width: 2, // Specify the border width here
                           ),
-                        ),
-                      ],
+                          borderRadius: BorderRadius.circular(10),
+                          color: const Color(0xff121438)),
+                      child: Row(
+                        children: [
+                          const SizedBox(
+                            width: 10,
+                          ),
+                          Image.asset(
+                            "assets/paytm.png",
+                            height: 44,
+                          ),
+                          const SizedBox(
+                            width: 10,
+                          ),
+                          const Text(
+                            "Paytm",
+                            style: TextStyle(
+                              fontSize: 20,
+                              fontWeight: FontWeight.w500,
+                              color: Colors.white,
+                            ),
+                          ),
+                        ],
+                      ),
                     ),
                   ),
                 ),
                 Padding(
                   padding: const EdgeInsets.only(top: 10),
-                  child: Container(
-                    width: 335,
-                    height: 58,
-                    decoration: BoxDecoration(
-                        border: Border.all(
-                          color: Colors.white, // Specify the border color here
-                          width: 2, // Specify the border width here
-                        ),
-                        borderRadius: BorderRadius.circular(10),
-                        color: const Color(0xff121438)),
-                    child: Row(
-                      children: [
-                        const SizedBox(
-                          width: 10,
-                        ),
-                        Image.asset(
-                          "assets/phonepe.png",
-                          height: 45,
-                        ),
-                        const SizedBox(
-                          width: 10,
-                        ),
-                        const Text(
-                          "PhonePe",
-                          style: TextStyle(
-                            fontSize: 20,
-                            fontWeight: FontWeight.w500,
-                            color: Colors.white,
+                  child: GestureDetector(
+                    onTap: () {
+                      //go to payment success page without route
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) => const PaymentSuccess()),
+                      );
+                    },
+                    child: Container(
+                      width: 335,
+                      height: 58,
+                      decoration: BoxDecoration(
+                          border: Border.all(
+                            color:
+                                Colors.white, // Specify the border color here
+                            width: 2, // Specify the border width here
                           ),
-                        ),
-                      ],
+                          borderRadius: BorderRadius.circular(10),
+                          color: const Color(0xff121438)),
+                      child: Row(
+                        children: [
+                          const SizedBox(
+                            width: 10,
+                          ),
+                          Image.asset(
+                            "assets/phonepe.png",
+                            height: 45,
+                          ),
+                          const SizedBox(
+                            width: 10,
+                          ),
+                          const Text(
+                            "PhonePe",
+                            style: TextStyle(
+                              fontSize: 20,
+                              fontWeight: FontWeight.w500,
+                              color: Colors.white,
+                            ),
+                          ),
+                        ],
+                      ),
                     ),
                   ),
                 ),
