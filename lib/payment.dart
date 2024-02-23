@@ -150,8 +150,44 @@ class _PaymentPageState extends State<PaymentPage> {
                   padding: const EdgeInsets.only(top: 10),
                   child: GestureDetector(
                     onTap: () {
+                      //save org,amount,current date timestamp,email,randomString() to collection 'blockchain'
+                      FirebaseFirestore.instance.collection('blockchain').add({
+                        'orga': widget.org,
+                        'amount': widget.amount,
+                        'date': DateTime.now(),
+                        'email': email,
+                        'tx': randomString(),
+                      });
+                      //add amount value to 'total' value in collection 'organizations' and document with field 'name' is  widget.org(amount and total are strings,convert to int and add)
+                      FirebaseFirestore.instance
+                          .collection('organizations')
+                          .where('name', isEqualTo: widget.org)
+                          .get()
+                          .then((QuerySnapshot querySnapshot) {
+                        querySnapshot.docs.forEach((doc) {
+                          FirebaseFirestore.instance
+                              .collection('organizations')
+                              .doc(doc.id)
+                              .update({
+                            'total': (int.parse(doc['total']) +
+                                    int.parse(widget.amount))
+                                .toString()
+                          });
+                        });
+                      });
+                      //add amount,date,randomString() to collection userdata, document with id email and  subcollection 'transactions'
+                      FirebaseFirestore.instance
+                          .collection('userdata')
+                          .doc(email)
+                          .collection('transactions')
+                          .add({
+                        'amount': widget.amount,
+                        'date': DateTime.now(),
+                        'tx': randomString(),
+                        'org': widget.org,
+                      });
                       //go to payment success page without route
-                      Navigator.push(
+                      Navigator.pushReplacement(
                         context,
                         MaterialPageRoute(
                             builder: (context) => const PaymentSuccess()),
@@ -197,8 +233,44 @@ class _PaymentPageState extends State<PaymentPage> {
                   padding: const EdgeInsets.only(top: 10),
                   child: GestureDetector(
                     onTap: () {
+                      //save org,amount,current date timestamp,email,randomString() to collection 'blockchain'
+                      FirebaseFirestore.instance.collection('blockchain').add({
+                        'orga': widget.org,
+                        'amount': widget.amount,
+                        'date': DateTime.now(),
+                        'email': email,
+                        'tx': randomString(),
+                      });
+                      //add amount value to 'total' value in collection 'organizations' and document with field 'name' is  widget.org(amount and total are strings,convert to int and add)
+                      FirebaseFirestore.instance
+                          .collection('organizations')
+                          .where('name', isEqualTo: widget.org)
+                          .get()
+                          .then((QuerySnapshot querySnapshot) {
+                        querySnapshot.docs.forEach((doc) {
+                          FirebaseFirestore.instance
+                              .collection('organizations')
+                              .doc(doc.id)
+                              .update({
+                            'total': (int.parse(doc['total']) +
+                                    int.parse(widget.amount))
+                                .toString()
+                          });
+                        });
+                      });
+                      //add amount,date,randomString() to collection userdata, document with id email and  subcollection 'transactions'
+                      FirebaseFirestore.instance
+                          .collection('userdata')
+                          .doc(email)
+                          .collection('transactions')
+                          .add({
+                        'amount': widget.amount,
+                        'date': DateTime.now(),
+                        'tx': randomString(),
+                        'org': widget.org,
+                      });
                       //go to payment success page without route
-                      Navigator.push(
+                      Navigator.pushReplacement(
                         context,
                         MaterialPageRoute(
                             builder: (context) => const PaymentSuccess()),
