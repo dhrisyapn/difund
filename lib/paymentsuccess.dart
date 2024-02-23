@@ -1,3 +1,4 @@
+import 'package:difund/org.dart';
 import 'package:flutter/material.dart';
 
 class PaymentSuccess extends StatefulWidget {
@@ -8,6 +9,17 @@ class PaymentSuccess extends StatefulWidget {
 }
 
 class _PaymentSuccessState extends State<PaymentSuccess> {
+  @override
+  void initState() {
+    super.initState();
+    Future.delayed(const Duration(seconds: 2), () {
+      Navigator.pushReplacement(
+        context,
+        MaterialPageRoute(builder: (context) => const OrgPage()),
+      );
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(

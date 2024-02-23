@@ -2,13 +2,17 @@ import 'package:difund/payment.dart';
 import 'package:flutter/material.dart';
 
 class DonatePage extends StatefulWidget {
-  const DonatePage({super.key});
+  String org;
+
+  DonatePage({super.key, required this.org});
 
   @override
   State<DonatePage> createState() => _DonatePageState();
 }
 
 class _DonatePageState extends State<DonatePage> {
+  final amountController = TextEditingController();
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -41,13 +45,14 @@ class _DonatePageState extends State<DonatePage> {
                       color: Colors.white),
                 ),
               ),
-              const Padding(
-                padding: EdgeInsets.only(left: 30, right: 30, top: 10),
+              Padding(
+                padding: const EdgeInsets.only(left: 30, right: 30, top: 10),
                 child: SizedBox(
                   height: 50,
                   child: TextField(
+                    controller: amountController,
                     cursorColor: Colors.white,
-                    decoration: InputDecoration(
+                    decoration: const InputDecoration(
                         prefixText: '₹ ', // Add rupee symbol here
                         prefixStyle: TextStyle(
                             color: Colors.white,
@@ -64,7 +69,7 @@ class _DonatePageState extends State<DonatePage> {
                             borderSide:
                                 BorderSide(color: Colors.white, width: 1))),
                     keyboardType: TextInputType.number, //number keyboard type
-                    style: TextStyle(color: Colors.white, fontSize: 20),
+                    style: const TextStyle(color: Colors.white, fontSize: 20),
                   ),
                 ),
               ),
@@ -74,7 +79,8 @@ class _DonatePageState extends State<DonatePage> {
                   Navigator.push(
                       context,
                       MaterialPageRoute(
-                          builder: (context) => const PaymentPage()));
+                          builder: (context) => PaymentPage(
+                              amount: amountController.text, org: widget.org)));
                 },
                 child: Padding(
                   padding: const EdgeInsets.only(top: 30, left: 30, right: 30),

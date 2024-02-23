@@ -13,6 +13,7 @@ class DetailsPage extends StatefulWidget {
 }
 
 class _DetailsPageState extends State<DetailsPage> {
+  String org = '';
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -88,6 +89,11 @@ class _DetailsPageState extends State<DetailsPage> {
                         return //Text("Loading");
                             const CircularProgressIndicator();
                       }
+                      // setState(() {
+                      //   org = snapshot.data!['name'];
+                      // });
+                      //if connection successfull set org
+                      org = snapshot.data!['name'];
 
                       return Padding(
                         padding: const EdgeInsets.only(top: 50),
@@ -157,7 +163,9 @@ class _DetailsPageState extends State<DetailsPage> {
                     Navigator.push(
                         context,
                         MaterialPageRoute(
-                            builder: (context) => const DonatePage()));
+                            builder: (context) => DonatePage(
+                                  org: org,
+                                )));
                   },
                   child: Padding(
                     padding:
