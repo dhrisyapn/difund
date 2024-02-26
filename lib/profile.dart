@@ -68,170 +68,183 @@ class _ProfilePageState extends State<ProfilePage> {
             end: Alignment.bottomRight,
           ),
         ),
-        child: Column(
-          children: [
-            const Padding(
-              padding: EdgeInsets.only(top: 10),
-              child: Text(
-                'My Profile',
-                style: TextStyle(fontSize: 35, color: Colors.white),
+        child: SingleChildScrollView(
+          child: Column(
+            children: [
+              const Padding(
+                padding: EdgeInsets.only(top: 10),
+                child: Text(
+                  'My Profile',
+                  style: TextStyle(fontSize: 35, color: Colors.white),
+                ),
               ),
-            ),
-            const SizedBox(
-              height: 20,
-            ),
-            //get name and age  from collection userdata and document and email
-            Padding(
-              padding: const EdgeInsets.only(left: 30, top: 20),
-              child: Row(
-                children: [
-                  StreamBuilder<DocumentSnapshot>(
-                    stream: FirebaseFirestore.instance
-                        .collection('userdata')
-                        .doc(email)
-                        .snapshots(),
-                    builder: (context, snapshot) {
-                      if (snapshot.hasData) {
-                        return Text(
-                          ' ${snapshot.data!['name']}',
-                          style: const TextStyle(
-                            color: Colors.white,
-                            fontSize: 30,
-                            fontFamily: 'Gotham',
-                            fontWeight: FontWeight.w300,
-                            height: 0.07,
-                          ),
-                        );
-                      } else {
-                        return const CircularProgressIndicator();
-                      }
-                    },
-                  ),
-                ],
+              SizedBox(
+                height: 5,
               ),
-            ),
-            Padding(
-              padding: const EdgeInsets.only(left: 30, top: 20),
-              child: Row(
-                children: [
-                  Text(email.toString(),
-                      style: const TextStyle(
-                        color: Colors.white,
-                        fontSize: 30,
-                        fontFamily: 'Gotham',
-                        fontWeight: FontWeight.w300,
-                      )),
-                ],
+              Image.asset(
+                'assets/user.png',
+                width: 200,
               ),
-            ),
-            const SizedBox(
-              height: 20,
-            ),
+              const SizedBox(
+                height: 5,
+              ),
+              //get name and age  from collection userdata and document and email
+              Padding(
+                padding: const EdgeInsets.only(left: 30, top: 20),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    StreamBuilder<DocumentSnapshot>(
+                      stream: FirebaseFirestore.instance
+                          .collection('userdata')
+                          .doc(email)
+                          .snapshots(),
+                      builder: (context, snapshot) {
+                        if (snapshot.hasData) {
+                          return Text(
+                            ' ${snapshot.data!['name']}',
+                            style: const TextStyle(
+                              color: Colors.white,
+                              fontSize: 30,
+                              fontFamily: 'Gotham',
+                              fontWeight: FontWeight.w300,
+                              height: 0.07,
+                            ),
+                          );
+                        } else {
+                          return const CircularProgressIndicator();
+                        }
+                      },
+                    ),
+                  ],
+                ),
+              ),
+              Padding(
+                padding: const EdgeInsets.only(left: 30, top: 20),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Text(email.toString(),
+                        style: const TextStyle(
+                          color: Colors.white,
+                          fontSize: 30,
+                          fontFamily: 'Gotham',
+                          fontWeight: FontWeight.w300,
+                        )),
+                  ],
+                ),
+              ),
+              const SizedBox(
+                height: 20,
+              ),
 
-            const Text('Transactions',
-                style: TextStyle(
-                  color: Colors.white,
-                  fontSize: 28,
-                  fontFamily: 'Gotham',
-                  fontWeight: FontWeight.w300,
-                )),
-            //get name date amount from collection userdata document email sub collection transactions
-            StreamBuilder<QuerySnapshot>(
-              stream: FirebaseFirestore.instance
-                  .collection('userdata')
-                  .doc(email)
-                  .collection('transactions')
-                  .orderBy('date', descending: true)
-                  .snapshots(),
-              builder: (BuildContext context,
-                  AsyncSnapshot<QuerySnapshot> snapshot) {
-                if (snapshot.hasError) {
-                  return const Text('Something went wrong');
-                }
+              const Text('Transactions',
+                  style: TextStyle(
+                    color: Colors.white,
+                    fontSize: 28,
+                    fontFamily: 'Gotham',
+                    fontWeight: FontWeight.w300,
+                  )),
+              //get name date amount from collection userdata document email sub collection transactions
+              StreamBuilder<QuerySnapshot>(
+                stream: FirebaseFirestore.instance
+                    .collection('userdata')
+                    .doc(email)
+                    .collection('transactions')
+                    .orderBy('date', descending: true)
+                    .snapshots(),
+                builder: (BuildContext context,
+                    AsyncSnapshot<QuerySnapshot> snapshot) {
+                  if (snapshot.hasError) {
+                    return const Text('Something went wrong');
+                  }
 
-                if (snapshot.connectionState == ConnectionState.waiting) {
-                  return const Text("Loading");
-                }
+                  if (snapshot.connectionState == ConnectionState.waiting) {
+                    return const Text("Loading");
+                  }
 
-                return Padding(
-                  padding: const EdgeInsets.only(left: 30, right: 30, top: 0),
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.center,
-                    children:
-                        snapshot.data!.docs.map((DocumentSnapshot document) {
-                      Map<String, dynamic> data =
-                          document.data()! as Map<String, dynamic>;
-                      return Padding(
-                        padding: const EdgeInsets.only(top: 10),
-                        child: Container(
-                          width: double.infinity,
-                          height: 100,
-                          decoration: BoxDecoration(
-                            color: Colors.white,
-                            borderRadius: BorderRadius.circular(10),
-                          ),
-                          child: Padding(
-                            padding: const EdgeInsets.only(left: 20, right: 20),
-                            child: Column(
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                Row(
-                                  mainAxisAlignment:
-                                      MainAxisAlignment.spaceBetween,
-                                  children: [
-                                    Column(
-                                      children: [
-                                        Text(
-                                          data['name'],
-                                          style: const TextStyle(
-                                            color:
-                                                Color.fromARGB(255, 15, 15, 15),
-                                            fontSize: 20,
-                                            fontFamily: 'Gotham',
-                                            fontWeight: FontWeight.w300,
+                  return Padding(
+                    padding: const EdgeInsets.only(left: 30, right: 30, top: 0),
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.center,
+                      children:
+                          snapshot.data!.docs.map((DocumentSnapshot document) {
+                        Map<String, dynamic> data =
+                            document.data()! as Map<String, dynamic>;
+                        return Padding(
+                          padding: const EdgeInsets.only(top: 10),
+                          child: Container(
+                            width: double.infinity,
+                            height: 100,
+                            decoration: BoxDecoration(
+                              color: Colors.white,
+                              borderRadius: BorderRadius.circular(10),
+                            ),
+                            child: Padding(
+                              padding:
+                                  const EdgeInsets.only(left: 20, right: 20),
+                              child: Column(
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  Row(
+                                    mainAxisAlignment:
+                                        MainAxisAlignment.spaceBetween,
+                                    children: [
+                                      Column(
+                                        children: [
+                                          Text(
+                                            data['org'],
+                                            style: const TextStyle(
+                                              color: Color.fromARGB(
+                                                  255, 15, 15, 15),
+                                              fontSize: 20,
+                                              fontFamily: 'Gotham',
+                                              fontWeight: FontWeight.w300,
+                                            ),
                                           ),
-                                        ),
 
-                                        //take date in ddmmyyyy format from timestamp and convert to string
+                                          //take date in ddmmyyyy format from timestamp and convert to string
 
-                                        Text(
-                                          DateFormat('dd-MM-yyyy')
-                                              .format(data['date'].toDate()),
-                                          style: const TextStyle(
-                                            color: Color.fromARGB(255, 0, 0, 0),
-                                            fontSize: 20,
-                                            fontFamily: 'Gotham',
-                                            fontWeight: FontWeight.w300,
+                                          Text(
+                                            DateFormat('dd-MM-yyyy')
+                                                .format(data['date'].toDate()),
+                                            style: const TextStyle(
+                                              color:
+                                                  Color.fromARGB(255, 0, 0, 0),
+                                              fontSize: 20,
+                                              fontFamily: 'Gotham',
+                                              fontWeight: FontWeight.w300,
+                                            ),
                                           ),
-                                        ),
-                                      ],
-                                    ),
-                                    Text(
-                                      data['amount'],
-                                      style: const TextStyle(
-                                        color: Color.fromARGB(255, 0, 0, 0),
-                                        fontSize: 20,
-                                        fontFamily: 'Gotham',
-                                        fontWeight: FontWeight.w300,
+                                        ],
                                       ),
-                                    ),
-                                  ],
-                                ),
-                              ],
+                                      Text(
+                                        data['amount'],
+                                        style: const TextStyle(
+                                          color: Color.fromARGB(255, 0, 0, 0),
+                                          fontSize: 20,
+                                          fontFamily: 'Gotham',
+                                          fontWeight: FontWeight.w300,
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+                                ],
+                              ),
                             ),
                           ),
-                        ),
-                      );
-                    }).toList(),
-                  ),
-                );
-              },
-            ),
-            const SizedBox(
-              height: 300,
-            ),
-          ],
+                        );
+                      }).toList(),
+                    ),
+                  );
+                },
+              ),
+              const SizedBox(
+                height: 300,
+              ),
+            ],
+          ),
         ),
       ),
     );
