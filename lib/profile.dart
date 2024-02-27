@@ -177,7 +177,7 @@ class _ProfilePageState extends State<ProfilePage> {
                             width: double.infinity,
                             height: 100,
                             decoration: BoxDecoration(
-                              color: Colors.white,
+                              color: Color(0xff212529),
                               borderRadius: BorderRadius.circular(10),
                             ),
                             child: Padding(
@@ -196,8 +196,7 @@ class _ProfilePageState extends State<ProfilePage> {
                                           Text(
                                             data['org'],
                                             style: const TextStyle(
-                                              color: Color.fromARGB(
-                                                  255, 15, 15, 15),
+                                              color: Colors.white,
                                               fontSize: 20,
                                               fontFamily: 'Gotham',
                                               fontWeight: FontWeight.w300,
@@ -210,9 +209,7 @@ class _ProfilePageState extends State<ProfilePage> {
                                             DateFormat('dd-MM-yyyy')
                                                 .format(data['date'].toDate()),
                                             style: const TextStyle(
-                                              color:
-                                                  Color.fromARGB(255, 0, 0, 0),
-                                              fontSize: 20,
+                                              color: Colors.white,
                                               fontFamily: 'Gotham',
                                               fontWeight: FontWeight.w300,
                                             ),
@@ -222,8 +219,7 @@ class _ProfilePageState extends State<ProfilePage> {
                                       Text(
                                         data['amount'],
                                         style: const TextStyle(
-                                          color: Color.fromARGB(255, 0, 0, 0),
-                                          fontSize: 20,
+                                          color: Colors.white,
                                           fontFamily: 'Gotham',
                                           fontWeight: FontWeight.w300,
                                         ),
