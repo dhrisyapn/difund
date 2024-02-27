@@ -65,7 +65,6 @@ class _OrgPageState extends State<OrgPage> {
             StreamBuilder<QuerySnapshot>(
               stream: FirebaseFirestore.instance
                   .collection('organizations')
-                  .orderBy('total', descending: true)
                   .snapshots(),
               builder: (BuildContext context,
                   AsyncSnapshot<QuerySnapshot> snapshot) {
