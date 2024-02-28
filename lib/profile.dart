@@ -83,51 +83,45 @@ class _ProfilePageState extends State<ProfilePage> {
               ),
               Image.asset(
                 'assets/user.png',
-                width: 200,
+                width: 80,
               ),
               const SizedBox(
                 height: 5,
               ),
               //get name and age  from collection userdata and document and email
               Padding(
-                padding: const EdgeInsets.only(left: 30, top: 20),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    StreamBuilder<DocumentSnapshot>(
-                      stream: FirebaseFirestore.instance
-                          .collection('userdata')
-                          .doc(email)
-                          .snapshots(),
-                      builder: (context, snapshot) {
-                        if (snapshot.hasData) {
-                          return Text(
-                            ' ${snapshot.data!['name']}',
-                            style: const TextStyle(
-                              color: Colors.white,
-                              fontSize: 30,
-                              fontFamily: 'Gotham',
-                              fontWeight: FontWeight.w300,
-                              height: 0.07,
-                            ),
-                          );
-                        } else {
-                          return const CircularProgressIndicator();
-                        }
-                      },
-                    ),
-                  ],
+                padding: const EdgeInsets.only(top: 20),
+                child: StreamBuilder<DocumentSnapshot>(
+                  stream: FirebaseFirestore.instance
+                      .collection('userdata')
+                      .doc(email)
+                      .snapshots(),
+                  builder: (context, snapshot) {
+                    if (snapshot.hasData) {
+                      return Text(
+                        ' ${snapshot.data!['name']}',
+                        style: const TextStyle(
+                          color: Colors.white,
+                          fontSize: 29,
+                          fontFamily: 'Gotham',
+                          fontWeight: FontWeight.w300,
+                        ),
+                      );
+                    } else {
+                      return const CircularProgressIndicator();
+                    }
+                  },
                 ),
               ),
               Padding(
-                padding: const EdgeInsets.only(left: 30, top: 20),
+                padding: const EdgeInsets.only(left: 0, top: 05),
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     Text(email.toString(),
                         style: const TextStyle(
                           color: Colors.white,
-                          fontSize: 30,
+                          fontSize: 22,
                           fontFamily: 'Gotham',
                           fontWeight: FontWeight.w300,
                         )),
@@ -141,7 +135,7 @@ class _ProfilePageState extends State<ProfilePage> {
               const Text('Transactions',
                   style: TextStyle(
                     color: Colors.white,
-                    fontSize: 28,
+                    fontSize: 22,
                     fontFamily: 'Gotham',
                     fontWeight: FontWeight.w300,
                   )),
@@ -217,7 +211,11 @@ class _ProfilePageState extends State<ProfilePage> {
                                         ],
                                       ),
                                       Text(
-                                        data['amount'],
+                                        NumberFormat.currency(
+                                                locale: 'en_IN',
+                                                symbol: '₹',
+                                                decimalDigits: 0)
+                                            .format(int.parse(data['amount'])),
                                         style: const TextStyle(
                                           color: Colors.white,
                                           fontFamily: 'Gotham',
