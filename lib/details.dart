@@ -254,7 +254,7 @@ class _DetailsPageState extends State<DetailsPage> {
                                                     Text(
                                                       data['email'],
                                                       style: const TextStyle(
-                                                          fontSize: 18,
+                                                          fontSize: 15,
                                                           fontWeight:
                                                               FontWeight.w700,
                                                           color: Colors.white),
