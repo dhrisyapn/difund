@@ -151,6 +151,8 @@ class _DetailsPageState extends State<DetailsPage> {
                       return Padding(
                         padding: const EdgeInsets.only(top: 10),
                         child: Text(
+                          //text align
+                          textAlign: TextAlign.justify,
                           snapshot.data!['desc'].toString(),
                           style: const TextStyle(
                               fontSize: 20,
