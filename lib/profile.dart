@@ -12,6 +12,7 @@ class ProfilePage extends StatefulWidget {
   State<ProfilePage> createState() => _ProfilePageState();
 }
 
+//this is profile page
 class _ProfilePageState extends State<ProfilePage> {
   final email = FirebaseAuth.instance.currentUser!.email;
 
