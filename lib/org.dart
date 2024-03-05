@@ -145,6 +145,13 @@ class _OrgPageState extends State<OrgPage> {
                 );
               },
             ),
+            SizedBox(
+              height: 100,
+            ),
+            Text('To view Blockchain, visit on desktop',
+                style: TextStyle(color: Colors.white)),
+            Text('https://difund-app.web.app/',
+                style: TextStyle(color: Colors.white)),
           ],
         ),
       ),
