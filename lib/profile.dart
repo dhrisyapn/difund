@@ -189,7 +189,9 @@ class _ProfilePageState extends State<ProfilePage> {
                                       Column(
                                         children: [
                                           Text(
-                                            data['org'],
+                                            data['org'].length > 12
+                                                ? '${data['org'].substring(0, 12)}...'
+                                                : data['org'],
                                             style: const TextStyle(
                                               color: Colors.white,
                                               fontSize: 20,
