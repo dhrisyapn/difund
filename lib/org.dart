@@ -86,22 +86,21 @@ class _OrgPageState extends State<OrgPage> {
                           document.data()! as Map<String, dynamic>;
                       return Padding(
                         padding: const EdgeInsets.only(top: 10),
-                        child: Container(
-                          width: double.infinity,
-                          height: 100,
-                          decoration: BoxDecoration(
-                              borderRadius: BorderRadius.circular(8),
-                              color: const Color(0xff121438)),
-                          child: GestureDetector(
-                            onTap: () {
-                              //navigate to details page with current doc id using Navigator.push
-                              Navigator.push(
-                                  context,
-                                  MaterialPageRoute(
-                                      builder: (context) => DetailsPage(
-                                            docid: document.id,
-                                          )));
-                            },
+                        child: GestureDetector(
+                          onTap: () {
+                            Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                    builder: (context) => DetailsPage(
+                                          docid: document.id,
+                                        )));
+                          },
+                          child: Container(
+                            width: double.infinity,
+                            height: 100,
+                            decoration: BoxDecoration(
+                                borderRadius: BorderRadius.circular(8),
+                                color: const Color(0xff121438)),
                             child: Column(
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: <Widget>[
