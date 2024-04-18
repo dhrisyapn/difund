@@ -187,6 +187,8 @@ class _ProfilePageState extends State<ProfilePage> {
                                         MainAxisAlignment.spaceBetween,
                                     children: [
                                       Column(
+                                        crossAxisAlignment:
+                                            CrossAxisAlignment.start,
                                         children: [
                                           Text(
                                             data['org'].length > 12
