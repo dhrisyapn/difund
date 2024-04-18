@@ -70,13 +70,19 @@ class _ProfilePageState extends State<ProfilePage> {
           ),
         ),
         child: SingleChildScrollView(
+          physics: const BouncingScrollPhysics(),
           child: Column(
             children: [
               const Padding(
                 padding: EdgeInsets.only(top: 10),
                 child: Text(
                   'My Profile',
-                  style: TextStyle(fontSize: 35, color: Colors.white),
+                  style: TextStyle(
+                    fontSize: 25,
+                    color: Colors.white,
+                    fontFamily: 'Gotham',
+                    fontWeight: FontWeight.w600,
+                  ),
                 ),
               ),
               SizedBox(
@@ -122,7 +128,7 @@ class _ProfilePageState extends State<ProfilePage> {
                     Text(email.toString(),
                         style: const TextStyle(
                           color: Colors.white,
-                          fontSize: 22,
+                          fontSize: 16,
                           fontFamily: 'Gotham',
                           fontWeight: FontWeight.w300,
                         )),
@@ -133,13 +139,20 @@ class _ProfilePageState extends State<ProfilePage> {
                 height: 20,
               ),
 
-              const Text('Transactions',
-                  style: TextStyle(
-                    color: Colors.white,
-                    fontSize: 22,
-                    fontFamily: 'Gotham',
-                    fontWeight: FontWeight.w300,
-                  )),
+              Padding(
+                padding: const EdgeInsets.only(left: 30),
+                child: Row(
+                  children: [
+                    const Text('Recent Transactions',
+                        style: TextStyle(
+                          color: Colors.white,
+                          fontSize: 16,
+                          fontFamily: 'Gotham',
+                          fontWeight: FontWeight.w300,
+                        )),
+                  ],
+                ),
+              ),
               //get name date amount from collection userdata document email sub collection transactions
               StreamBuilder<QuerySnapshot>(
                 stream: FirebaseFirestore.instance
@@ -240,7 +253,7 @@ class _ProfilePageState extends State<ProfilePage> {
                 },
               ),
               const SizedBox(
-                height: 300,
+                height: 20,
               ),
             ],
           ),
