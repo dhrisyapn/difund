@@ -13,10 +13,11 @@ class _PaymentSuccessState extends State<PaymentSuccess> {
   void initState() {
     super.initState();
     Future.delayed(const Duration(seconds: 2), () {
-      Navigator.pushReplacement(
-        context,
-        MaterialPageRoute(builder: (context) => const OrgPage()),
-      );
+      //pop current screen
+      Navigator.pop(context);
+      Navigator.pop(context);
+      Navigator.pop(context);
+      Navigator.pop(context);
     });
   }
 

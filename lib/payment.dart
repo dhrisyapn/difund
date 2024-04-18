@@ -106,7 +106,7 @@ class _PaymentPageState extends State<PaymentPage> {
                       'org': widget.org,
                     });
                     //go to payment success page without route
-                    Navigator.pushReplacement(
+                    Navigator.push(
                       context,
                       MaterialPageRoute(
                           builder: (context) => const PaymentSuccess()),
@@ -187,7 +187,7 @@ class _PaymentPageState extends State<PaymentPage> {
                         'org': widget.org,
                       });
                       //go to payment success page without route
-                      Navigator.pushReplacement(
+                      Navigator.push(
                         context,
                         MaterialPageRoute(
                             builder: (context) => const PaymentSuccess()),
@@ -270,7 +270,7 @@ class _PaymentPageState extends State<PaymentPage> {
                         'org': widget.org,
                       });
                       //go to payment success page without route
-                      Navigator.pushReplacement(
+                      Navigator.push(
                         context,
                         MaterialPageRoute(
                             builder: (context) => const PaymentSuccess()),

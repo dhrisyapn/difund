@@ -76,7 +76,7 @@ class _DonatePageState extends State<DonatePage> {
               //gesture detector button with text "continue"
               GestureDetector(
                 onTap: () {
-                  Navigator.pushReplacement(
+                  Navigator.push(
                       context,
                       MaterialPageRoute(
                           builder: (context) => PaymentPage(
