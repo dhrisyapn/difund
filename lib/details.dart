@@ -254,7 +254,9 @@ class _DetailsPageState extends State<DetailsPage> {
                                                       MainAxisAlignment.center,
                                                   children: [
                                                     Text(
-                                                      data['email'],
+                                                      data['email'].length > 22
+                                                          ? '${data['email'].substring(0, 12)}...'
+                                                          : data['email'],
                                                       style: const TextStyle(
                                                           fontSize: 15,
                                                           fontWeight:
