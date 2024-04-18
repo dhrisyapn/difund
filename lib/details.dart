@@ -64,9 +64,9 @@ class _DetailsPageState extends State<DetailsPage> {
                       if (snapshot.hasError) {
                         return const Text('Something went wrong');
                       }
-
                       if (snapshot.connectionState == ConnectionState.waiting) {
-                        return const Text("Loading");
+                        return //Text("Loading");
+                            const CircularProgressIndicator();
                       }
 
                       return Padding(
@@ -201,6 +201,10 @@ class _DetailsPageState extends State<DetailsPage> {
                         .snapshots(),
                     builder: (BuildContext context,
                         AsyncSnapshot<DocumentSnapshot> snapshot) {
+                      if (snapshot.connectionState == ConnectionState.waiting) {
+                        return //Text("Loading");
+                            const CircularProgressIndicator();
+                      }
                       return StreamBuilder<QuerySnapshot>(
                           stream: FirebaseFirestore.instance
                               .collection('blockchain')
