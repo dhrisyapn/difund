@@ -232,8 +232,9 @@ class _ProfilePageState extends State<ProfilePage> {
                                         NumberFormat.currency(
                                                 locale: 'en_IN',
                                                 symbol: '₹',
-                                                decimalDigits: 0)
-                                            .format(int.parse(data['amount'])),
+                                                decimalDigits: 2)
+                                            .format(double.parse(
+                                                data['amount'].toString())),
                                         style: const TextStyle(
                                           color: Colors.white,
                                           fontFamily: 'Gotham',
